@@ -1,0 +1,553 @@
+/* ═══════════════════════════════════════════════
+   CP Arena — Clean Theme + CPH Button/Font Ref
+   ═══════════════════════════════════════════════ */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --ac: #4ade80;
+    --wa: #f87171;
+    --tle: #fbbf24;
+    --rte: #c084fc;
+    --ce: #fb923c;
+    --run-color: #22d3ee;
+    --tc-color: #22d3ee;
+    --border: rgba(255, 255, 255, 0.07);
+    --surface: rgba(0, 0, 0, 0.2);
+    --mono: var(--vscode-editor-font-family, Consolas, 'Ubuntu Mono', monospace);
+}
+
+body {
+    font-family: var(--vscode-font-family, -apple-system, sans-serif);
+    font-size: 13px;
+    color: var(--vscode-foreground, #ccc);
+    background: transparent;
+    line-height: 1.4;
+    scrollbar-width: thin;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.hidden { display: none !important; }
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 3px; }
+
+/* ── Header ── */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 4px 8px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--vscode-sideBar-background, #1e1e2e);
+}
+
+.header-icon { font-size: 14px; }
+.header-actions { display: flex; gap: 2px; flex-shrink: 0; }
+
+.icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border: none;
+    border-radius: 4px;
+    background: transparent;
+    color: var(--vscode-descriptionForeground, #888);
+    cursor: pointer;
+}
+.icon-btn:hover { background: rgba(255,255,255,0.07); color: var(--vscode-foreground); }
+.run-btn { color: var(--ac); }
+.run-btn:hover { background: rgba(74,222,128,0.12); }
+.stop-btn { color: var(--wa); }
+.danger-btn:hover { background: rgba(248,113,113,0.12); color: var(--wa); }
+
+/* ── Problem Info ── */
+.problem-info {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+    gap: 4px;
+}
+.problem-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--tc-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 0.3px;
+    width: 100%;
+    cursor: pointer;
+}
+.problem-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.problem-actions {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+.meta-tag {
+    font-size: 10px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.3px;
+    margin-right: 6px;
+}
+
+/* ── Compilation Bar ── */
+.compilation-bar {
+    padding: 4px 10px;
+    font-size: 11px;
+    border-bottom: 1px solid var(--border);
+}
+.compilation-bar.compiling { color: var(--run-color); }
+.compilation-bar.success { color: var(--ac); }
+.compilation-bar.error { color: var(--wa); }
+
+.compilation-icon {
+    cursor: pointer;
+    display: inline-block;
+}
+.compilation-icon:hover {
+    opacity: 0.7;
+}
+
+/* ── Compilation Error Box ── */
+.ce-error-box {
+    margin: 8px 10px;
+    background: rgba(251, 146, 60, 0.1);
+    border: 1px solid var(--ce);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+}
+.ce-error-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 8px;
+    background: rgba(251, 146, 60, 0.2);
+    color: var(--ce);
+    font-weight: 600;
+    font-size: 12px;
+    border-bottom: 1px solid rgba(251, 146, 60, 0.2);
+}
+.ce-close-btn {
+    background: transparent;
+    border: none;
+    color: var(--ce);
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 4px;
+    opacity: 0.8;
+}
+.ce-close-btn:hover {
+    opacity: 1;
+}
+.ce-error-content {
+    border: none;
+    background: transparent;
+    color: var(--vscode-foreground);
+    padding: 8px;
+    max-height: 200px;
+    overflow-y: auto;
+    font-size: 11px;
+    margin: 0;
+}
+
+/* ── Empty State ── */
+.empty-state { padding: 40px 20px; text-align: center; }
+.empty-icon { font-size: 36px; opacity: 0.2; margin-bottom: 12px; }
+.empty-title { font-size: 14px; font-weight: 600; color: var(--vscode-descriptionForeground); margin-bottom: 6px; }
+.empty-desc { font-size: 11px; opacity: 0.5; line-height: 1.6; }
+.empty-desc code { background: rgba(255,255,255,0.05); padding: 1px 4px; border-radius: 3px; font-family: var(--mono); font-size: 10px; }
+
+/* ═══════════════════════════════════════════════
+   Test Case Cards
+   ═══════════════════════════════════════════════ */
+.test-cases {
+    padding: 4px 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.tc-card {
+    border-radius: 4px;
+    overflow: hidden;
+    border-left: 4px solid #444;
+    background: var(--surface);
+}
+.tc-card.verdict-AC      { border-left-color: var(--ac); }
+.tc-card.verdict-WA      { border-left-color: var(--wa); }
+.tc-card.verdict-TLE     { border-left-color: var(--tle); }
+.tc-card.verdict-RTE     { border-left-color: var(--rte); }
+.tc-card.verdict-CE      { border-left-color: var(--ce); }
+.tc-card.verdict-RUNNING { border-left-color: var(--run-color); }
+
+/* ── Card Header: 2-row grid, buttons stacked right ── */
+.tc-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding: 9px 14px 13px 12px;
+    cursor: pointer;
+    user-select: none;
+}
+.tc-header:hover { background: rgba(255,255,255,0.02); }
+
+.tc-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+    line-height: 1.1;
+    min-width: 0;
+}
+
+.tc-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.tc-right {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.tc-chevron {
+    font-size: 10px;
+    color: var(--tc-color);
+    transition: transform 120ms;
+    display: inline-block;
+}
+.tc-card.collapsed .tc-chevron { transform: rotate(-90deg); }
+
+/* CPH ref: .case-number { font-weight: bolder; color: rgb(25,152,211); } */
+.tc-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--tc-color);
+}
+
+/* CPH ref: .result-data { font-size: 1.15em; } */
+.verdict-text {
+    font-size: 14px;
+}
+.verdict-text:empty { display: none; }
+.verdict-text.AC { color: var(--ac); }
+.verdict-text.WA { color: var(--wa); }
+.verdict-text.TLE { color: var(--tle); }
+.verdict-text.RTE { color: var(--rte); }
+.verdict-text.CE { color: var(--ce); }
+.verdict-text.RUNNING { color: var(--run-color); animation: pulse 1s infinite; }
+
+@keyframes pulse { 50% { opacity: 0.3; } }
+
+/* CPH ref: .exec-time { background: #fbff001c; color: white; padding: 2px 5px; font-size: 80%; } */
+.exec-time {
+    background: #fbff001c;
+    color: white;
+    padding: 1px 4px;
+    font-size: 10px;
+    border-radius: 3px;
+}
+
+/* CPH ref: .btn-green { background: #5c8b2d; } .btn-red { background: #b0203d; } */
+.tc-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    color: #fff;
+}
+.tc-btn:hover { filter: brightness(115%); }
+.tc-btn:active { transform: scale(0.92); }
+.tc-btn.play { background: #5c8b2d; }
+.tc-btn.del  { background: #b0203d; }
+
+/* ── Card Body ── */
+.tc-body {
+    overflow: hidden;
+    transition: max-height 200ms ease;
+}
+.tc-card.collapsed .tc-body {
+    max-height: 0 !important;
+    opacity: 0;
+}
+
+/* ── Sections ── */
+.tc-section {
+    padding: 6px 8px;
+    border-top: 1px solid var(--border);
+    position: relative;
+}
+
+.tc-section-label {
+    display: inline-block;
+    font-size: 12px;
+    margin-bottom: 3px;
+}
+
+
+.copy-btn {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    background: none;
+    border: none;
+    color: rgba(148,163,184,0.4);
+    cursor: pointer;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+.copy-btn:hover { color: var(--vscode-foreground); }
+.copy-btn.copied { color: var(--ac); }
+
+/* CPH ref: textarea { background: rgba(0,0,0,0.2); color: bisque; border: 1px solid rgba(100,100,100,0.2); } */
+.code-block {
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.5;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(100, 100, 100, 0.15);
+    border-radius: 3px;
+    padding: 2px 3px;
+    color: var(--vscode-foreground, #ccc);
+    white-space: pre-wrap;
+    word-break: break-all;
+    min-height: 24px;
+    max-height: 200px;
+    overflow-y: auto;
+    width: 100%;
+    display: block;
+    resize: vertical;
+    outline: none;
+}
+
+textarea.code-block:focus {
+    border-color: rgba(34, 211, 238, 0.4);
+    background: rgba(0, 0, 0, 0.35);
+}
+
+/* Stderr */
+.stderr-section .code-block {
+    font-size: 11px;
+    border-color: rgba(251, 191, 36, 0.15);
+}
+
+/* ── Diff ── */
+.diff-line { display: block; }
+.diff-added { background: rgba(74,222,128,0.1); color: var(--ac); }
+.diff-removed { background: rgba(248,113,113,0.1); color: var(--wa); text-decoration: line-through; opacity: 0.6; }
+.diff-char-removed { background: rgba(248,113,113,0.2); text-decoration: line-through; }
+
+/* ═══════════════════════════════════════════════
+   Bottom Toolbar — Compact & Sleek
+   ═══════════════════════════════════════════════ */
+.tc-controls {
+    padding: 6px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.btn-new-tc {
+    background: var(--vscode-button-secondaryBackground, rgba(255, 255, 255, 0.08));
+    color: var(--vscode-button-secondaryForeground, rgba(255, 255, 255, 0.8));
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: all 150ms ease;
+}
+
+.btn-new-tc:hover {
+    background: var(--vscode-button-secondaryHoverBackground, rgba(255, 255, 255, 0.15));
+    color: var(--vscode-foreground);
+}
+
+.btn-new-tc:active {
+    transform: scale(0.98);
+}
+
+/* ── Inline toggle row (ONLINE_JUDGE checkbox) ── */
+.cph-set-oj {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: none;
+    color: rgba(255,255,255,0.45);
+    font-size: 11px;
+    cursor: pointer;
+    padding: 2px 0;
+    transition: color 150ms;
+}
+.cph-set-oj:hover {
+    color: rgba(255,255,255,0.7);
+}
+.cph-set-oj input[type="checkbox"] {
+    cursor: pointer;
+    accent-color: var(--ac);
+    width: 13px;
+    height: 13px;
+}
+
+/* ── Sticky bottom bar ── */
+.bottom-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 8px;
+    border-top: 1px solid var(--border);
+    position: sticky;
+    bottom: 0;
+    background: var(--vscode-sideBar-background, #1e1e2e);
+    z-index: 10;
+}
+
+/* ── Toggle switch (modern iOS-style) ── */
+.oj-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    font-size: 11px;
+    color: rgba(255,255,255,0.45);
+    white-space: nowrap;
+    padding: 2px 0;
+    transition: color 150ms;
+    border: none;
+    background: none;
+    border-radius: 0;
+}
+.oj-toggle:hover { color: rgba(255,255,255,0.7); }
+
+.oj-toggle input[type="checkbox"] {
+    position: relative;
+    appearance: none;
+    -webkit-appearance: none;
+    width: 28px;
+    height: 16px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 200ms ease;
+    flex-shrink: 0;
+}
+.oj-toggle input[type="checkbox"]::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 12px;
+    height: 12px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 50%;
+    transition: all 200ms ease;
+}
+.oj-toggle input[type="checkbox"]:checked {
+    background: var(--vscode-button-background, #0e639c);
+    opacity: 0.8;
+}
+.oj-toggle input[type="checkbox"]:checked::after {
+    left: 14px;
+    background: var(--vscode-button-foreground, #ffffff);
+}
+
+.oj-toggle.oj-enabled {
+    color: rgba(255,255,255,0.8);
+    border: none;
+}
+.oj-toggle.oj-enabled span {
+    color: rgba(255,255,255,0.8);
+}
+
+/* ═══════════════════════════════════════════════
+   Add Test Case Form
+   ═══════════════════════════════════════════════ */
+.add-tc-form {
+    margin: 4px 6px;
+    padding: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+}
+.form-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 11px;
+    margin-bottom: 8px;
+    color: var(--vscode-descriptionForeground);
+}
+.form-group { margin-bottom: 6px; }
+.form-group label {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    margin-bottom: 3px;
+    opacity: 0.5;
+}
+.form-group textarea {
+    width: 100%;
+    font-family: var(--mono);
+    font-size: 12px;
+    background: rgba(0,0,0,0.2);
+    border: 1px solid rgba(100,100,100,0.2);
+    padding: 6px;
+    color: var(--vscode-foreground, #ccc);
+    resize: vertical;
+    outline: none;
+}
+.form-group textarea:focus { border-color: rgba(34,211,238,0.4); }
+
+.btn-primary {
+    width: 100%;
+    padding: 6px;
+    background: #177bb4;
+    color: #fff;
+    font-weight: 600;
+    font-size: 11px;
+    border: 2px solid transparent;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.btn-primary:hover { filter: brightness(115%); }
+
+

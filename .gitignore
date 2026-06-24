@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+*.vsix
+
+# Test artifacts
+.vscode-test/
+
+# macOS / Windows junk
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor swap files
+*.swp
+*.swo
+
+# Local competitive programming state (not part of the extension)
+.cph/
+.cp-arena/
+
+# Manually extracted VSIX archives (dev only)
+extract_*/

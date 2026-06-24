@@ -1,0 +1,150 @@
+{
+  "name": "cp-arena",
+  "displayName": "CP Arena",
+  "description": "⚡ A premium competitive programming judge for VS Code. Compile, run, and test with style.",
+  "version": "1.0.9",
+  "publisher": "aashwat",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aashwat/cp-arena"
+  },
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "icon": "media/icon.png",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "cp-arena",
+          "title": "CP Arena",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "cp-arena": [
+        {
+          "type": "webview",
+          "id": "cp-arena.panel",
+          "name": "CP Arena"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "cp-arena.runAll",
+        "title": "CP Arena: Run All Test Cases",
+        "icon": "$(play)"
+      },
+      {
+        "command": "cp-arena.addTestCase",
+        "title": "CP Arena: Add Test Case",
+        "icon": "$(add)"
+      },
+      {
+        "command": "cp-arena.stop",
+        "title": "CP Arena: Stop Execution",
+        "icon": "$(debug-stop)"
+      },
+      {
+        "command": "cp-arena.clearAll",
+        "title": "CP Arena: Clear All Test Cases",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "cp-arena.submit",
+        "title": "CP Arena: Submit Code",
+        "icon": "$(send)"
+      }
+    ],
+    "configuration": {
+      "title": "CP Arena",
+      "properties": {
+        "cp-arena.general.defaultLanguage": {
+          "type": "string",
+          "default": "cpp",
+          "enum": [
+            "cpp",
+            "c",
+            "python",
+            "java",
+            "javascript",
+            "rust",
+            "go"
+          ],
+          "description": "Default language for new problems."
+        },
+        "cp-arena.general.timeLimit": {
+          "type": "number",
+          "default": 3000,
+          "description": "Default time limit in milliseconds."
+        },
+        "cp-arena.general.companionPort": {
+          "type": "number",
+          "default": 10043,
+          "description": "Port for Competitive Companion listener."
+        },
+        "cp-arena.general.savePath": {
+          "type": "string",
+          "default": "",
+          "description": "Default save path for problem files. Leave empty to use current workspace."
+        },
+        "cp-arena.cpp.compileCommand": {
+          "type": "string",
+          "default": "g++-15 -O2 -std=c++23 -mmacosx-version-min=26.0",
+          "description": "C++ compilation command."
+        },
+        "cp-arena.cpp.fileExtension": {
+          "type": "string",
+          "default": ".cpp",
+          "description": "File extension for C++ files."
+        },
+        "cp-arena.python.runCommand": {
+          "type": "string",
+          "default": "python3",
+          "description": "Python run command."
+        },
+        "cp-arena.java.compileCommand": {
+          "type": "string",
+          "default": "javac",
+          "description": "Java compilation command."
+        },
+        "cp-arena.java.runCommand": {
+          "type": "string",
+          "default": "java",
+          "description": "Java run command."
+        },
+        "cp-arena.rust.compileCommand": {
+          "type": "string",
+          "default": "rustc -O",
+          "description": "Rust compilation command."
+        },
+        "cp-arena.c.compileCommand": {
+          "type": "string",
+          "default": "gcc -std=c17 -O2 -Wall",
+          "description": "C compilation command."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "node build.js",
+    "watch": "node build.js --watch",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.80.0",
+    "esbuild": "^0.20.0",
+    "typescript": "^5.3.0"
+  }
+}

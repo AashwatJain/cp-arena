@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'none';
+                   style-src {{cspSource}} 'unsafe-inline';
+                   script-src {{cspSource}};
+                   font-src {{cspSource}};">
+    <link rel="stylesheet" href="{{cssUri}}">
+    <title>CP Arena</title>
+</head>
+<body>
+
+    <!-- Problem Info Bar -->
+    <div class="problem-info hidden" id="problem-info">
+        <div class="problem-name" id="problem-name" title="Problem Name"></div>
+        <div class="problem-meta">
+            <div style="display: flex; gap: 4px;">
+                <span class="meta-tag" id="problem-tl"></span>
+                <span class="meta-tag" id="problem-ml"></span>
+            </div>
+            <div class="problem-actions">
+                <button class="icon-btn run-btn" id="btn-run-all" title="Run All">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4 2l10 6-10 6V2z"/></svg>
+                </button>
+                <button class="icon-btn stop-btn hidden" id="btn-stop" title="Stop">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="3" width="10" height="10" rx="1"/></svg>
+                </button>
+                <button class="icon-btn submit-btn" id="btn-submit" title="Submit Code">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M1 8L15 2L9 14L7 9L1 8Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Compilation Status -->
+    <div class="compilation-bar hidden" id="compilation-bar">
+        <span class="compilation-icon" id="compilation-icon"></span>
+        <span class="compilation-text" id="compilation-text"></span>
+    </div>
+
+    <!-- Compilation Error Box -->
+    <div class="ce-error-box hidden" id="ce-error-box">
+        <div class="ce-error-header">
+            <span>Compilation Error</span>
+            <button class="ce-close-btn" id="ce-close-btn" title="Dismiss">×</button>
+        </div>
+        <div class="ce-error-content code-block" id="ce-error-content"></div>
+    </div>
+
+    <!-- No Problem State -->
+    <div class="empty-state" id="empty-state">
+        <div class="empty-icon">⚡</div>
+        <div class="empty-title">No Problem Loaded</div>
+        <div class="empty-desc">
+            Open a source file with a <code>.prob</code> file, or use
+            <strong>Competitive Companion</strong> to parse a problem.
+        </div>
+    </div>
+
+    <!-- Test Cases Container -->
+    <div class="test-cases" id="test-cases"></div>
+
+    <!-- TC Controls (Below Test Cases) -->
+    <div class="tc-controls hidden" id="tc-controls" style="display: none !important;"></div>
+
+    <!-- Bottom Toolbar -->
+    <div class="bottom-bar hidden" id="bottom-bar">
+        <label class="oj-toggle oj-enabled" id="set-oj-label" title="Define ONLINE_JUDGE macro">
+            <input type="checkbox" id="online-judge-toggle" checked>
+            <span>OJ</span>
+        </label>
+        <button class="btn-new-tc" id="btn-add">
+            + New TC
+        </button>
+    </div>
+
+    <script src="{{jsUri}}"></script>
+</body>
+</html>
