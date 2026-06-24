@@ -136,7 +136,7 @@ export class CPArenaViewProvider implements vscode.WebviewViewProvider {
                 saveProblem(this._currentProblem);
             }
 
-            vscode.env.clipboard.writeText(code);
+            await vscode.env.clipboard.writeText(code);
 
             // Convert problem URL to submit page URL for Codeforces
             let openUrl = submitUrl;
@@ -156,7 +156,8 @@ export class CPArenaViewProvider implements vscode.WebviewViewProvider {
                     openUrl = `https://codeforces.com/problemset/submit/${problemsetMatch[1]}/${problemsetMatch[2]}`;
                 }
             }
-            vscode.env.openExternal(vscode.Uri.parse(openUrl));
+            await vscode.env.openExternal(vscode.Uri.parse(openUrl));
+            vscode.window.showInformationMessage('CP Arena: Code copied to clipboard. Paste it on the submit page.');
         } catch (err) {
             vscode.window.showErrorMessage('Failed to read source file for submission.');
         }
