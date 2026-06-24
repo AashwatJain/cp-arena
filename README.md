@@ -98,7 +98,7 @@ All settings are available under **Settings → Extensions → CP Arena**.
 
 ```bash
 # Clone the repository
-git clone https://github.com/aashwat/cp-arena.git
+git clone https://github.com/AashwatJain/cp-arena.git
 cd cp-arena
 
 # Install dependencies
