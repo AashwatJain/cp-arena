@@ -3,10 +3,10 @@
   "displayName": "CP Arena",
   "description": "⚡ A premium competitive programming judge for VS Code. Compile, run, and test with style.",
   "version": "1.0.9",
-  "publisher": "aashwat",
+  "publisher": "AashwatJain",
   "repository": {
     "type": "git",
-    "url": "https://github.com/aashwat/cp-arena"
+    "url": "https://github.com/AashwatJain/cp-arena.git"
   },
   "engines": {
     "vscode": "^1.80.0"
