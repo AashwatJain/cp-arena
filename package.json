@@ -2,7 +2,7 @@
   "name": "cp-arena",
   "displayName": "CP Arena",
   "description": "⚡ A premium competitive programming judge for VS Code. Compile, run, and test with style.",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "publisher": "AashwatJain",
   "repository": {
     "type": "git",
