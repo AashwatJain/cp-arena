@@ -103,7 +103,9 @@ function renderProblem() {
     $tcControls.classList.remove('hidden');
     if ($bottomBar) $bottomBar.classList.remove('hidden');
     $problemName.textContent = currentProblem.name;
-    $problemTL.textContent = '4000ms';
+    // CP Arena enforces a flat 4s limit per test case, independent of the
+    // problem's declared time limit — show what's actually enforced.
+    $problemTL.textContent = `${currentProblem.timeLimit}ms`;
     $problemML.textContent = `${currentProblem.memoryLimit || 256}MB`;
     $testCases.innerHTML = '';
     currentProblem.testCases.forEach(tc => $testCases.appendChild(buildCard(tc)));

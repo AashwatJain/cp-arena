@@ -1,10 +1,7 @@
 # ⚡ CP Arena
 
 **A competitive programming judge for VS Code.**
-Compile, run, and test your solutions against multiple test cases — all without leaving your editor.
-
-[![Version](https://img.shields.io/visual-studio-marketplace/v/AashwatJain.cp-arena)](https://marketplace.visualstudio.com/items?itemName=AashwatJain.cp-arena)
-[![Installs](https://img.shields.io/visual-studio-marketplace/i/AashwatJain.cp-arena)](https://marketplace.visualstudio.com/items?itemName=AashwatJain.cp-arena)
+Compile, run, and test your solutions against multiple test cases without leaving your editor.
 
 ---
 
@@ -12,116 +9,147 @@ Compile, run, and test your solutions against multiple test cases — all withou
 
 | Feature | Description |
 |---|---|
-| 🧪 **Test Case Management** | Add, edit, delete, and re-run test cases inline in the sidebar |
-| ▶️ **One-Click Run** | Compile and run all test cases — or a single one — with one click |
-| 📡 **Competitive Companion** | Auto-import problems and test cases from Codeforces, AtCoder, CodeChef, and 50+ judges |
-| ✅ **Verdict System** | Instant `AC` / `WA` / `TLE` / `RTE` / `CE` verdicts with execution time |
-| ⏱ **Relaxed Time Limits** | Every test case gets **2.5×** the problem's declared time limit, so slower local hardware doesn't cause false `TLE`s |
-| 🌐 **Multi-Language** | C++, C, Java, Python, JavaScript, Rust, and Go |
-| 📤 **Quick Submit** | Copies your code to the clipboard and opens the submission page |
-| 🔁 **CPH Compatible** | Automatically imports problems saved by the legacy Competitive Programming Helper (`.cph`) |
+| 🧪 **Test Case Management** | Add, edit, delete, and re-run test cases from the sidebar |
+| ▶️ **One-Click Run** | Compile once and run every test case, or re-run just one |
+| 📡 **Competitive Companion** | Auto-import problems and test cases from Codeforces, AtCoder, CodeChef, and other judges |
+| ✅ **Instant Verdicts** | `AC` / `WA` / `TLE` / `RTE` / `CE` with per-case execution time |
+| 🎯 **Forgiving Output Check** | Token-based comparison ignores extra whitespace; `YES`/`NO` matched case-insensitively |
+| ⏱ **Relaxed Time Limit** | Runs are judged against 2.5× the problem's stated limit, so slower local hardware doesn't cause false `TLE`s |
+| 🛡 **Runaway Guard** | A 16 MB output cap kills solutions stuck printing in an infinite loop |
+| 🛑 **Stop Anytime** | Kill a running solution instantly, including child processes |
+| 📤 **Quick Submit** | Copies your code and opens the judge's submit page |
+| 🔁 **CPH Compatible** | Problems created by Competitive Programming Helper (`.cph`) are imported automatically |
 | 🚦 **ONLINE_JUDGE Toggle** | Compile C/C++ with `-DONLINE_JUDGE` straight from the sidebar |
-| 🎨 **Native UI** | A clean, dark-themed sidebar that feels at home in VS Code |
 
 ---
 
 ## 🚀 Getting Started
 
-### Prerequisites
+### Install
+
+Open **Extensions** in VS Code, search for **CP Arena**, and click **Install**.
+
+### Requirements
 
 - **VS Code** `1.80.0` or later
-- A compiler / interpreter for the language you use, installed and available on your `PATH`
-  (e.g. `g++` for C++, `python3` for Python, `javac` / `java` for Java, `rustc` for Rust, `go`, `node`)
-- *(Optional)* the [Competitive Companion](https://github.com/jmerle/competitive-companion) browser extension for auto-importing problems
+- A compiler or interpreter for the language you use, available on your `PATH`
+- *(Optional)* The [Competitive Companion](https://github.com/jmerle/competitive-companion) browser extension for importing problems
 
-### Installation
-
-Search for **"CP Arena"** in the VS Code Extensions view and click **Install**, or:
-
-```bash
-code --install-extension AashwatJain.cp-arena
-```
+> **Important:** CP Arena does not bundle any compiler. Before your first run, set the compile/run command for your language to match what's installed on your machine. See [Set up your compiler](#-set-up-your-compiler).
 
 ---
 
-## ⚠️ Configure Your Compiler First
+## 🔧 Set up your compiler
 
-CP Arena runs whatever compile/run command you configure — so the commands need to match **your** machine. The shipped defaults may not work as-is on every OS (for example, the default C++ command targets a specific compiler/OS).
+CP Arena ships with generic defaults, but compiler names and flags vary between machines and operating systems. **Edit the command for your language to match your own setup** before running anything.
 
-Open **Settings** (`Ctrl+,` / `Cmd+,`) → search **"CP Arena"**, and set the command for your setup. A few common C++ examples:
+Open **Settings → Extensions → CP Arena**, or add the setting directly to your `settings.json`.
 
-| OS / Toolchain | Suggested `cp-arena.cpp.compileCommand` |
-|---|---|
-| Linux / Windows (MinGW) | `g++ -O2 -std=c++17 -Wall` |
-| macOS (Homebrew GCC 15) | `g++-15 -O2 -std=c++23` |
-| Clang | `clang++ -O2 -std=c++17` |
+### C++
 
-> 💡 Don't include the input/output file names or the `-o` flag — CP Arena appends those automatically. Just provide the compiler and the flags you want.
+The default is `g++ -O2 -std=c++17`. Change it to whatever your system provides:
 
-The same applies to the C, Java, Rust, and Python commands (see the [Configuration](#️-configuration) table). Edit whichever ones you use.
+```jsonc
+{
+  // Standard g++ (most Linux distros, MinGW / MSYS2 on Windows)
+  "cp-arena.cpp.compileCommand": "g++ -O2 -std=c++17",
+
+  // Homebrew GCC on macOS (version-suffixed binary)
+  "cp-arena.cpp.compileCommand": "g++-15 -O2 -std=c++23",
+
+  // Clang
+  "cp-arena.cpp.compileCommand": "clang++ -O2 -std=c++17",
+
+  // Codeforces-like build with extra warnings and a larger stack
+  "cp-arena.cpp.compileCommand": "g++ -O2 -std=c++20 -Wall -Wextra"
+}
+```
+
+Anything valid on your command line works here — add sanitizers, change the standard, point at an absolute compiler path, whatever you need. CP Arena appends the source file and output path automatically, so don't include them yourself.
+
+### Other languages
+
+```jsonc
+{
+  "cp-arena.c.compileCommand": "gcc -std=c17 -O2 -Wall",
+  "cp-arena.rust.compileCommand": "rustc -O",
+  "cp-arena.java.compileCommand": "javac",
+  "cp-arena.java.runCommand": "java",
+  "cp-arena.python.runCommand": "python3"   // use "python" on most Windows setups
+}
+```
+
+### Verifying your compiler
+
+If a run fails with a "command not found" style error, the command isn't on your `PATH`. Check it in a terminal first:
+
+```bash
+g++ --version
+python3 --version
+```
+
+Whatever name works there is the name to put in your settings.
 
 ---
 
 ## 📖 Usage
 
-### Import a Problem
-Install **Competitive Companion** in your browser, open any problem, and click the green **+** icon. CP Arena creates the source file, saves the test cases, and loads everything into the sidebar.
+### Import a problem
 
-### Run Test Cases
-1. Open your solution file — the sidebar focuses on it automatically
-2. Click **▶ Run All** in the sidebar (or the status-bar button)
-3. Verdicts stream in: ✅ `AC`, ❌ `WA`, ⏱ `TLE`, 💥 `RTE`, 🛠 `CE`
+Install **Competitive Companion**, open a problem page, and click the extension's **+** icon. CP Arena creates the source file, saves the sample tests, and opens everything in the sidebar.
 
-You can also click **▶** on a single test case card to run just that one. Passing cases collapse automatically; failing ones expand so you can see the diff.
+### Open a problem locally
 
-> ⏱ **Note on time limits:** CP Arena runs each test case with **2.5× the problem's declared time limit** (so a 1000ms problem gets 2500ms locally). Your machine and the judge's grading server aren't identical, and interpreted languages carry startup overhead — the extra headroom avoids false `TLE`s while still catching genuinely slow solutions.
+Open any supported source file (`.cpp`, `.c`, `.py`, `.java`, `.rs`, `.go`) and the sidebar attaches to it. If no saved problem exists, you get an empty workspace where you can add your own test cases.
 
-### Add / Edit / Delete Test Cases
-- **Add:** click **+ New TC** and fill in the input and expected output
-- **Edit:** expand a case, change the fields, and click away — it saves automatically
-- **Delete:** click the 🗑 icon on a case
+### Run
 
-### Stop Execution
-Click ⏹ (or run `CP Arena: Stop Execution`) to immediately kill a running solution, including child processes from wrappers like `go run` and `java`.
+Click **▶ Run All** in the sidebar, or use the **Run Tests** button in the status bar. Your file is saved and compiled first, then each case runs in turn. Cards collapse on `AC` and expand on failure, so only the problems need your attention.
 
-### Submit Your Solution
-Click the ✈ **Submit** icon. CP Arena saves the file, copies your code to the clipboard, and opens the correct submission page in your browser. Paste and submit.
+To re-run a single case, click the **▶** on that card.
 
-### `ONLINE_JUDGE` Toggle
-The `OJ` toggle in the bottom bar controls whether `-DONLINE_JUDGE` is passed to the C/C++ compiler — handy for switching between local debug output and submission builds.
+### Submit
+
+Click the **Submit** icon. CP Arena saves the file, copies your code to the clipboard, and opens the matching Codeforces submit page (contest, gym, group, and problemset URLs are all handled). Paste and submit.
+
+If the problem has no saved URL, you'll be prompted for one.
+
+### `ONLINE_JUDGE` toggle
+
+The **OJ** switch in the bottom bar controls whether `-DONLINE_JUDGE` is passed to the C/C++ compiler, so you can keep local debug output behind an `#ifndef ONLINE_JUDGE` guard without editing code between runs.
 
 ---
 
-## ⚙️ Configuration
-
-All settings live under **Settings → Extensions → CP Arena**.
+## ⚙️ Settings
 
 | Setting | Default | Description |
 |---|---|---|
-| `cp-arena.general.defaultLanguage` | `cpp` | Default language for imported problems |
-| `cp-arena.general.timeLimit` | `3000` | Fallback time limit (ms) for problems that don't declare one. Runs are allowed **2.5×** this value |
-| `cp-arena.general.companionPort` | `10043` | Competitive Companion listener port |
-| `cp-arena.general.savePath` | *(workspace)* | Where new problem files are saved |
-| `cp-arena.cpp.compileCommand` | *(compiler + flags)* | **Edit this to match your C++ compiler** |
+| `cp-arena.general.defaultLanguage` | `cpp` | Language used for newly imported problems |
+| `cp-arena.general.timeLimit` | `3000` | Time limit recorded on locally created problems (ms) |
+| `cp-arena.general.companionPort` | `10043` | Port the Competitive Companion listener binds to |
+| `cp-arena.general.savePath` | *(workspace root)* | Where imported problem files are written |
+| `cp-arena.cpp.compileCommand` | `g++ -O2 -std=c++17` | C++ compile command |
 | `cp-arena.c.compileCommand` | `gcc -std=c17 -O2 -Wall` | C compile command |
 | `cp-arena.java.compileCommand` | `javac` | Java compile command |
 | `cp-arena.java.runCommand` | `java` | Java run command |
 | `cp-arena.rust.compileCommand` | `rustc -O` | Rust compile command |
 | `cp-arena.python.runCommand` | `python3` | Python interpreter |
 
+> The sidebar shows the problem's original time limit, but runs are enforced against **2.5× that limit**. Local hardware, cold binary starts and editor overhead rarely match the original grading server, so enforcing the exact limit tends to produce false `TLE`s.
+
 ---
 
 ## 🛠 Supported Languages
 
-| Language | Mode | Default Tool |
+| Language | Mode | Default tool |
 |---|---|---|
 | **C++** | compiled | `g++` |
 | **C** | compiled | `gcc` |
 | **Rust** | compiled | `rustc` |
-| **Java** | compiled + run | `javac` + `java` |
+| **Java** | compiled, then run | `javac` + `java` |
 | **Python** | interpreted | `python3` |
 | **JavaScript** | interpreted | `node` |
-| **Go** | run | `go run` |
+| **Go** | compiled and run | `go run` |
 
 ---
 
@@ -132,10 +160,20 @@ Available from the command palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
 | Command | Description |
 |---|---|
 | `CP Arena: Run All Test Cases` | Compile and run every test case |
-| `CP Arena: Add Test Case` | Add a new empty test case |
+| `CP Arena: Add Test Case` | Append an empty test case |
 | `CP Arena: Stop Execution` | Kill the running solution |
-| `CP Arena: Clear All Test Cases` | Remove all test cases |
-| `CP Arena: Submit Code` | Copy code and open the submission page |
+| `CP Arena: Clear All Test Cases` | Remove all test cases from the current problem |
+| `CP Arena: Submit Code` | Copy code and open the submit page |
+
+---
+
+## 🧠 How Verdicts Work
+
+- **AC** — output matches
+- **WA** — tokens differ. Trailing whitespace and newlines are ignored, and `YES`/`NO` compare case-insensitively
+- **TLE** — exceeded 2.5× the problem's time limit, or produced more than 16 MB of output
+- **RTE** — non-zero exit code or a fatal signal such as `SIGSEGV`
+- **CE** — compilation failed; the compiler's output is shown in the sidebar
 
 ---
 
@@ -145,20 +183,18 @@ Available from the command palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
 git clone https://github.com/AashwatJain/cp-arena.git
 cd cp-arena
 npm install
-npm run build      # bundles src/ → dist/ with esbuild
-npx vsce package   # produces a .vsix
+npm run build        # bundles src/ into dist/ with esbuild
+npx vsce package     # produces a .vsix
 ```
 
-Press **F5** in the project to launch a development window with the extension loaded.
+Press **F5** in the project to launch a VS Code window with the extension loaded for debugging.
 
 ---
 
 ## 📜 License
 
-Licensed under the terms in [LICENSE.md](LICENSE.md).
+See [LICENSE.md](LICENSE.md).
 
 ---
 
-<p align="center">
-  Made with ❤️ for competitive programmers
-</p>
+<p align="center">Made for competitive programmers</p>

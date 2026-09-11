@@ -2,7 +2,7 @@
   "name": "cp-arena",
   "displayName": "CP Arena",
   "description": "⚡ A premium competitive programming judge for VS Code. Compile, run, and test with style.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "publisher": "AashwatJain",
   "repository": {
     "type": "git",
@@ -99,8 +99,8 @@
         },
         "cp-arena.cpp.compileCommand": {
           "type": "string",
-          "default": "g++-15 -O2 -std=c++23 -mmacosx-version-min=26.0",
-          "description": "C++ compilation command."
+          "default": "g++ -O2 -std=c++17",
+          "description": "C++ compilation command. Change this to match the compiler installed on your machine (e.g. \"g++-15 -O2 -std=c++23\" for Homebrew GCC, or \"clang++ -O2 -std=c++17\")."
         },
         "cp-arena.cpp.fileExtension": {
           "type": "string",
