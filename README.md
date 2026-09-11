@@ -16,6 +16,7 @@ Compile, run, and test your solutions against multiple test cases — all withou
 | ▶️ **One-Click Run** | Compile and run all test cases — or a single one — with one click |
 | 📡 **Competitive Companion** | Auto-import problems and test cases from Codeforces, AtCoder, CodeChef, and 50+ judges |
 | ✅ **Verdict System** | Instant `AC` / `WA` / `TLE` / `RTE` / `CE` verdicts with execution time |
+| ⏱ **Relaxed Time Limits** | Every test case gets **2.5×** the problem's declared time limit, so slower local hardware doesn't cause false `TLE`s |
 | 🌐 **Multi-Language** | C++, C, Java, Python, JavaScript, Rust, and Go |
 | 📤 **Quick Submit** | Copies your code to the clipboard and opens the submission page |
 | 🔁 **CPH Compatible** | Automatically imports problems saved by the legacy Competitive Programming Helper (`.cph`) |
@@ -73,6 +74,8 @@ Install **Competitive Companion** in your browser, open any problem, and click t
 
 You can also click **▶** on a single test case card to run just that one. Passing cases collapse automatically; failing ones expand so you can see the diff.
 
+> ⏱ **Note on time limits:** CP Arena runs each test case with **2.5× the problem's declared time limit** (so a 1000ms problem gets 2500ms locally). Your machine and the judge's grading server aren't identical, and interpreted languages carry startup overhead — the extra headroom avoids false `TLE`s while still catching genuinely slow solutions.
+
 ### Add / Edit / Delete Test Cases
 - **Add:** click **+ New TC** and fill in the input and expected output
 - **Edit:** expand a case, change the fields, and click away — it saves automatically
@@ -96,7 +99,7 @@ All settings live under **Settings → Extensions → CP Arena**.
 | Setting | Default | Description |
 |---|---|---|
 | `cp-arena.general.defaultLanguage` | `cpp` | Default language for imported problems |
-| `cp-arena.general.timeLimit` | `3000` | Default time limit per test case (ms) |
+| `cp-arena.general.timeLimit` | `3000` | Fallback time limit (ms) for problems that don't declare one. Runs are allowed **2.5×** this value |
 | `cp-arena.general.companionPort` | `10043` | Competitive Companion listener port |
 | `cp-arena.general.savePath` | *(workspace)* | Where new problem files are saved |
 | `cp-arena.cpp.compileCommand` | *(compiler + flags)* | **Edit this to match your C++ compiler** |

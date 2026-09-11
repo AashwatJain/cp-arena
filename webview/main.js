@@ -103,7 +103,7 @@ function renderProblem() {
     $tcControls.classList.remove('hidden');
     if ($bottomBar) $bottomBar.classList.remove('hidden');
     $problemName.textContent = currentProblem.name;
-    $problemTL.textContent = `${currentProblem.timeLimit}ms`;
+    $problemTL.textContent = '4000ms';
     $problemML.textContent = `${currentProblem.memoryLimit || 256}MB`;
     $testCases.innerHTML = '';
     currentProblem.testCases.forEach(tc => $testCases.appendChild(buildCard(tc)));
