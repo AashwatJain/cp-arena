@@ -21,6 +21,15 @@ const activeProcesses: Set<ChildProcess> = new Set();
 const MAX_OUTPUT_BYTES = 16 * 1024 * 1024; // 16 MB
 
 /**
+ * CP Arena gives every run extra headroom over the problem's declared time
+ * limit: the effective local timeout is the problem's time limit multiplied
+ * by this factor. Local hardware and interpreted-language startup overhead
+ * rarely match the original grading server, so a flat 1x cap causes false
+ * TLEs. A solution is only flagged TLE if it exceeds the scaled limit.
+ */
+const TIME_LIMIT_MULTIPLIER = 2.5;
+
+/**
  * Forcefully kill a child process (and its process group, when possible).
  * Killing the group handles wrapper commands like `go run` / `java` that
  * spawn their own children which would otherwise survive a plain kill.
@@ -51,7 +60,9 @@ export async function runTestCase(
     testCase: TestCase,
     timeLimit: number
 ): Promise<TestCase> {
-    const result = await execute(executablePath, language, testCase.input, timeLimit);
+    // Give the run extra headroom over the problem's declared time limit.
+    const effectiveTimeLimit = Math.round(timeLimit * TIME_LIMIT_MULTIPLIER);
+    const result = await execute(executablePath, language, testCase.input, effectiveTimeLimit);
 
     const updatedTC: TestCase = {
         ...testCase,
